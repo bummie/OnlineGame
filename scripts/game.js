@@ -25,13 +25,6 @@ function init()
     updatePlayer("TEst", "3", "32");
     
     listPlayers();
-    console.log("2");
-    /*var a = listPlayers();
-
-        a.forEach(function(element)
-        {
-            console.log(element);
-        });      */
 }
 
 function update()

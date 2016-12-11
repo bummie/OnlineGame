@@ -9,8 +9,6 @@ var KEY = "&key=";
 
 var keyHash = "JIOEJIJFJ24IAJ323FIEJFIEA6EUOFAH";
 
-var playerList;
-
 function updatePlayer(name, x, y)
 {
     var out_data = name + "|" + x + "|" + y;
@@ -42,12 +40,7 @@ function listPlayers()
 {
     $.get(BASE_URL + CMD_LIST, function(response)
     {
-        var r =  response;
-        var data = r.substr(1);;
-        console.log(gameName + ": " + data);
-        var array = data.split("|");
-        console.log("1");
-        return array;
+        console.log(gameName + ": " + response);
     });
 }
 
