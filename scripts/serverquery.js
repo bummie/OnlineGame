@@ -21,11 +21,13 @@ function updatePlayer(name, x, y)
 
 function readPlayer(name)
 {
+    var pos;
     $.get(BASE_URL + CMD_READ + DATA + name, function(response)
     {
         console.log(gameName + ": " + response);
-        return response;
+        pos = response.split('|');
     });
+    return pos;
 }
 
 function deletePlayer(name)
@@ -38,10 +40,14 @@ function deletePlayer(name)
 
 function listPlayers()
 {
+    var array;
     $.get(BASE_URL + CMD_LIST, function(response)
     {
         console.log(gameName + ": " + response);
+        var r = response.substr(1);
+        array = r.split('|');
     });
+    return array;
 }
 
 // MD5 hasing

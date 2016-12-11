@@ -19,12 +19,14 @@ function OnlineGame()
 function init()
 {
     console.info(gameName + 'Initialised');
+    jQuery.ajaxSetup({async:false});
     
     setInterval(update, refreshRate);
     
-    updatePlayer("TEst", "3", "32");
+    updatePlayer("Tesla", "13", "12");
     
-    listPlayers();
+    var a = listPlayers();
+    console.log(a.length);
 }
 
 function update()
@@ -35,7 +37,9 @@ function update()
 
 function logic()
 {
-    
+    var x = Math.floor((Math.random() * 100) + 1);
+    var y = Math.floor((Math.random() * 100) + 1);
+    updatePlayer("Tesla", ""+x, ""+y);
 }
 
 function render()
@@ -52,6 +56,14 @@ function render()
     gfx.strokeStyle = 'black';
     gfx.lineWidth = 2;
     gfx.strokeText(logText, 0, canv.height - 5);
+    
+    
+    var pos = readPlayer("Tesla");
+    var x = parseInt(pos[0]);
+    var y = parseInt(pos[1]);
+    
+    gfx.fillStyle = 'black';
+    gfx.fillRect(x, y, 30, 30);
     
 }
 
