@@ -1,6 +1,6 @@
 var canv;
 var gfx;
-var refreshRate = 1000 / 60;
+var refreshRate = 1000 / 24;
 var gameName = "[OnlineGame]";
 var color = "#EBEBEB";
 
