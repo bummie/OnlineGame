@@ -8,6 +8,9 @@ var i = 0;
 
 var logText = "Welcome";
 
+var player;
+
+
 function OnlineGame()
 {
     canv = document.getElementById('gameCanvas');
@@ -27,6 +30,8 @@ function init()
     
     var a = listPlayers();
     console.log(a.length);
+    
+    player = new Player("Basj");
 }
 
 function update()
@@ -39,7 +44,7 @@ function logic()
 {
     var x = Math.floor((Math.random() * 100) + 1);
     var y = Math.floor((Math.random() * 100) + 1);
-    updatePlayer("Tesla", ""+x, ""+y);
+    //player.move(player, x,y);
 }
 
 function render()
@@ -57,15 +62,32 @@ function render()
     gfx.lineWidth = 2;
     gfx.strokeText(logText, 0, canv.height - 5);
     
-    
-    var pos = readPlayer("Tesla");
-    var x = parseInt(pos[0]);
-    var y = parseInt(pos[1]);
-    
-    gfx.fillStyle = 'black';
-    gfx.fillRect(x, y, 30, 30);
-    
+    player.draw(player);
 }
+
+document.addEventListener('keydown', function(event) {
+    if(event.keyCode == 37) 
+    {
+        console.log('Left was pressed');
+        player.move(player, -5, 0);
+    }
+    else if(event.keyCode == 39) 
+    {
+        console.log('Right was pressed');
+        player.move(player, 5, 0);
+
+    }else if(event.keyCode == 38) 
+    {
+        console.log('Up was pressed');
+        player.move(player, 0, -5);
+
+    }else if(event.keyCode == 40) 
+    {
+        console.log('Down was pressed');
+        player.move(player, 0, 5);
+    }
+});
+
 
 // Det mannligste objektet
 function Player(navn)
@@ -80,7 +102,20 @@ Player.prototype.draw = function(obj)
 {
     if(obj != null)
     {
-        
+        gfx.fillStyle = 'black';
+        gfx.fillRect(obj.x, obj.y, 30, 30);
+        gfx.font = "bold 15px sans-serif";
+        gfx.fillStyle = 'black';
+        gfx.fillText(obj.name, obj.x, obj.y + 50);
+    }
+}
+
+Player.prototype.move = function(obj, x, y)
+{
+    if(obj != null)
+    {
+        obj.x = obj.x + x;
+        obj.y = obj.y + y;
     }
 }
 
