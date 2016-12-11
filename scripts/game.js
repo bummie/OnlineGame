@@ -8,8 +8,9 @@ var i = 0;
 
 var logText = "Welcome";
 
+var plyName;
 var player;
-
+var otherPlayers;
 
 function OnlineGame()
 {
@@ -26,12 +27,13 @@ function init()
     
     setInterval(update, refreshRate);
     
-    updatePlayer("Tesla", "13", "12");
+   // updatePlayer("Tesla", "13", "12");
     
-    var a = listPlayers();
-    console.log(a.length);
+    plyName = prompt("Type in your name!","Numa");
+    updatePlayer(plyName, "30", "30");
+    player = new Player(plyName);
+    loadPlayers();
     
-    player = new Player("Basj");
 }
 
 function update()
@@ -42,9 +44,7 @@ function update()
 
 function logic()
 {
-    var x = Math.floor((Math.random() * 100) + 1);
-    var y = Math.floor((Math.random() * 100) + 1);
-    //player.move(player, x,y);
+    updatePlayers();
 }
 
 function render()
@@ -63,7 +63,21 @@ function render()
     gfx.strokeText(logText, 0, canv.height - 5);
     
     player.draw(player);
+    
+    if(otherPlayers != null)
+    {
+        for(var i = 0; i < otherPlayers.length; i++)
+        {
+            otherPlayers[i].draw(otherPlayers[i]);
+        }
+    }
 }
+
+window.onbeforeunload = onExit;
+  function onExit()
+  {
+      deletePlayer(player.name);
+  }
 
 document.addEventListener('keydown', function(event) {
     if(event.keyCode == 37) 
@@ -116,6 +130,43 @@ Player.prototype.move = function(obj, x, y)
     {
         obj.x = obj.x + x;
         obj.y = obj.y + y;
+        
+        updatePlayer(obj.name, ""+obj.x, ""+obj.y);
+    }
+}
+
+Player.prototype.setPos = function(obj, x, y)
+{
+    if(obj != null)
+    {
+        obj.x = x;
+        obj.y = y;
+        
+    }
+}
+
+function loadPlayers()
+{
+    var plyArr =  listPlayers();
+    otherPlayers = new Array(plyArr.length-1);
+    for(var i = 0; i < otherPlayers.length; i++)
+    {
+        otherPlayers[i] = new Player(plyArr[i], 30, 30);
+    }
+}
+
+function updatePlayers()
+{
+    if(otherPlayers != null)
+    {
+        for(var i = 0; i < otherPlayers.length; i++)
+        {
+            console.log("Name: " + otherPlayers[i].name);
+            var playerData = readPlayer(otherPlayers[i].name);
+            var x = parseInt(playerData[0]);
+            var y = parseInt(playerData[1]);
+            otherPlayers[i].setPos(otherPlayers[i], x, y);
+        }
     }
 }
 
