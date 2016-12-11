@@ -1,0 +1,30 @@
+* {
+    margin: 0;
+}
+
+html, body 
+{
+    height: 100%;
+}
+
+#container
+{
+    position: absolute;
+    margin: 0;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: coral;
+}
+
+
+canvas
+{
+    position: relative;
+    border: 1px solid black;
+    margin: auto;
+    margin-top: 40px;
+    display: block;
+}
+
