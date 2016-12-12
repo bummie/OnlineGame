@@ -44,6 +44,7 @@ function update()
 
 function logic()
 {
+    loadNewPlayers();
     updatePlayers();
 }
 
@@ -148,10 +149,19 @@ Player.prototype.setPos = function(obj, x, y)
 function loadPlayers()
 {
     var plyArr =  listPlayers();
-    otherPlayers = new Array(plyArr.length-1);
+    otherPlayers = new Array(plyArr.length);
     for(var i = 0; i < otherPlayers.length; i++)
     {
         otherPlayers[i] = new Player(plyArr[i], 30, 30);
+    }
+}
+
+function loadNewPlayers()
+{
+    var plyArr =  listPlayers();
+    if(plyArr.length != otherPlayers.length)
+    {
+        loadPlayers();
     }
 }
 
