@@ -6,4 +6,4 @@ Move the box with your arrow keys.
 The js client tells PHP to retrieve a file, or write to a file with the player data. It's extremly slow, but it works. 
 Fun little project, have a go at it!
 
-<img src="http://imgur.com/a/sfYJk">
+<img src="http://i.imgur.com/lJLLTtj.png">
